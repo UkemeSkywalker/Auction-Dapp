@@ -1,7 +1,11 @@
+import { Children, ReactNode } from "react"
 import Header from "./header"
 
-const MainLayout = (props: any) => {
-  const { children } = props
+interface IProps{
+  children : ReactNode
+}
+
+const MainLayout = ({children}:IProps) => {
   return <>
   {children}
     <Header />
