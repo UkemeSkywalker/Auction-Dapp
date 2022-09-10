@@ -7,8 +7,8 @@ interface IProps{
 
 const MainLayout = ({children}:IProps) => {
   return <>
-  {children}
     <Header />
+    {children}
 </>
 
 }
