@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const { data: ended } = useAuctionRead('ended')
   const { data: ownerAddress } = useAuctionRead('owner')
   const { address, isConnecting, isDisconnected } = useAccount()
-  const {data:writeData, isLoading:writeLoading, isSuccess, write, writeAsync} = useAuctionWrite("Auction")
+  // const {data:writeData, isLoading:writeLoading, isSuccess:writeSuccess, isError:writeError, write, writeAsync} = useAuctionWrite("Auction")
   console.log('Currently connected account:', address)
   console.log('Owner Address: ', ownerAddress)
   const isAdmin = ownerAddress === address ? true : false
@@ -25,23 +25,23 @@ const Home: NextPage = () => {
       return <div>Error ...</div>
     }
     if (isAdmin && !started) {
-      ;<button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Start Auction <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
     console.log('passed!!!!!')
     if (!started) {
-      ;<button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction not Started <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
     if (started && !ended) {
-      ;<button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction in Progress <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
     if (ended) {
-      ;<button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction has Ended <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
@@ -68,14 +68,15 @@ const Home: NextPage = () => {
             </div>
             <div>
               <h2 className="">
-                Highest Bid{' '}
+                Highest Bid
+                </h2>
                 <span className="bg-yellow-500 ml-2 rounded-lg pl-4  py-1 font-bold">
                   1.465
                   <span className="ml-1 bg-yellow-200 px-4 py-1 rounded-lg font-extrabold">
                     ETH
                   </span>
                 </span>
-              </h2>
+              
             </div>
             <div className="mt-10">
               <input type="text" placeholder="Place your bid" />

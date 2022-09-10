@@ -6,8 +6,8 @@ const useAuctionWrite = ( functionName="") => {
         ...AUCTION_CONTRACT,
         functionName
       })
-      const { data, isLoading, isSuccess, write, writeAsync} = useContractWrite(config)
+      const { data, isLoading,  isError, write, writeAsync} = useContractWrite(config)
 
-      return {data, isLoading, isSuccess, write, writeAsync}
+      return {data, isLoading, isError, write, writeAsync}
 }
 export default useAuctionWrite
