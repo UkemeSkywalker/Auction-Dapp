@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <WagmiConfig client={client}>
-        <ConnectKitProvider>
+        <ConnectKitProvider theme="midnight">
             <MainLayout>
               <Component {...pageProps} />
             </MainLayout>
