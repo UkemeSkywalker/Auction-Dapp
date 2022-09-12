@@ -5,7 +5,7 @@ import useAuctionRead from '../hooks/useAuctionStatus'
 import LeftArrow from './components/commons/icons/RightArrow'
 import useAuctionWrite from '../hooks/useContractWrite'
 import { useAccount } from 'wagmi'
-import {UseAuctionTimer} from "../hooks/useAuctionTimer";
+import UseAuctionTimer from '../hooks/useAuctionTimer'
 
 
 
@@ -38,6 +38,7 @@ const Home: NextPage = () => {
   //   </>
   // }
 
+  // Set Time
   const time = new Date();
   time.setSeconds(time.getSeconds() + 600);
  
@@ -49,52 +50,52 @@ const Home: NextPage = () => {
       return <div>Error ...</div>
     }
     if (isAdmin && !started) {
-      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-3 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Start Auction <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
     console.log('passed!!!!!')
     if (!started) {
-      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-3 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction not Started <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
     if (started && !ended) {
-      return <button className="flex bg-yellow-500 text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex bg-yellow-500 text-white bg-zinc-800 px-3 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction in Progress <LeftArrow className="ml-3 pt-1.5 " />
       </button>
     }
     if (ended) {
-      return <button className="flex  text-white bg-zinc-800 px-8 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
+      return <button className="flex  text-white bg-zinc-800 px-3 py-2 rounded-lg font-['Helvetica Neue'] mx-auto">
         Auction has Ended <LeftArrow className="ml-3 pt-1.5" />
       </button>
     }
   }
 
   return (
-    <div className="bg-white-800">
+    <div className="">
       <div className="flex justify-between w-11/12 mx-auto mt-10 flex-wrap">
-        <div className="flex-2 flex justify-center border-solid border-2 border-yellow-300 p-8 rounded-lg bg-white">
-          <Image
-            className="rounded-lg"
+        <div className="flex-2 flex justify-center bg-white p-4 rounded-lg">
+          <Image 
+            className="rounded-lg p-5"
             src="https://gateway.pinata.cloud/ipfs/QmeirtN78yF3fL2tDDJPvVfJBAkMP7NVyhw26RCxvpaGjE"
             alt="Wakanda NFT"
-            width={336}
-            height={434}
+            width={450}
+            height={500}
           />
         </div>
       
-        <div className="flex-1 justify-center text-center px-10 py-3">
-          
+        <div className="flex-1 justify-center text-center px-6 ml-6 py-3">
           {statusButton()}
           <div className="mt-7">
-            <div className="mb-9 text-white">
+            <div className="mb-3 text-white">
               <p>Skywalker NFT Studios®</p>
               <h1 className="text-6xl ">Wakanda Forever</h1>
               <p className="pt-4">This NFT card would give you access to special <br></br> airdrops and Wakanda events</p>
             </div>
             <div className="  ">
-              <h2 className="mb-5 text-white">
+            <UseAuctionTimer expiryTimestamp = {time} />
+              <h2 className="mb-2 text-white">
                 Highest Bid
                 </h2>
                 <span className="bg-yellow-500 ml-2 rounded-lg pl-4  py-1 font-bold">
