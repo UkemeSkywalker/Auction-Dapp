@@ -5,18 +5,42 @@ import useAuctionRead from '../hooks/useAuctionStatus'
 import LeftArrow from './components/commons/icons/RightArrow'
 import useAuctionWrite from '../hooks/useContractWrite'
 import { useAccount } from 'wagmi'
+import {UseAuctionTimer} from "../hooks/useAuctionTimer";
+
+
 
 const Home: NextPage = () => {
   const { data: started, isError, isLoading } = useAuctionRead('started')
   const { data: ended } = useAuctionRead('ended')
   const { data: ownerAddress } = useAuctionRead('owner')
   const { address, isConnecting, isDisconnected } = useAccount()
+  
   // const {data:writeData, isLoading:writeLoading, isSuccess:writeSuccess, isError:writeError, write, writeAsync} = useAuctionWrite("Auction")
   console.log('Currently connected account:', address)
   console.log('Owner Address: ', ownerAddress)
   const isAdmin = ownerAddress === address ? true : false
   console.log('started', started)
 
+
+ 
+  // const {seconds, minutes, hours, days, start, pause, isRunning} = UseAuctionTimer(SetTime());
+
+  // const timer = () => {
+  //   return <>
+
+  //     <div className='text-white'>
+  //       <button onClick={start}>Start</button>
+  //       <button onClick={pause}>Pause</button>
+  //       <p>{isRunning ? "Running" : "Timer not started"}</p>
+  //       <span>{hours} : </span><span>{minutes}:</span><span>{seconds}</span>
+  //     </div>
+      
+  //   </>
+  // }
+
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 600);
+ 
   const statusButton = () => {
     if (isLoading) {
       return <div>Loading...</div>
@@ -59,7 +83,9 @@ const Home: NextPage = () => {
             height={434}
           />
         </div>
+      
         <div className="flex-1 justify-center text-center px-10 py-3">
+          
           {statusButton()}
           <div className="mt-7">
             <div className="mb-9 text-white">
